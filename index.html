@@ -66,75 +66,36 @@
         }
         .gallery-content {
             display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 10px 0;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
         }
         .gallery-content img {
             flex-shrink: 0;
             border-radius: 4px;
+            margin: 0 10px;
             transition: transform 0.3s;
         }
-        .gallery-content img:nth-child(3) {
+        .gallery-content img.current {
             transform: scale(1.5);
+            border: 3px solid #4169E1;
         }
-        .gallery-content img:not(:nth-child(3)) {
-            transform: scale(0.8);
-        }
-        .comment-form {
-            margin-top: 20px;
-        }
-        .comment-form textarea {
+        .gallery-navigation {
+            position: absolute;
+            top: 50%;
             width: 100%;
-            height: 50px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
         }
-        .comment-form input[type="file"] {
-            margin-bottom: 10px;
-        }
-        .comment-form button {
-            padding: 10px 20px;
-            background-color: #4169E1;
+        .gallery-navigation button {
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .comments-preview {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .comment {
-            border: 1px solid #ccc;
             padding: 10px;
-            border-radius: 5px;
-        }
-        .comment p {
-            margin: 0 0 10px 0;
-        }
-        .like-button {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #007bff;
             cursor: pointer;
-        }
-        .view-all-comments {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .view-all-comments a {
-            font-size: 16px;
-            color: #007bff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border: 1px solid #007bff;
-            border-radius: 5px;
+            border-radius: 50%;
         }
         footer {
             text-align: center;
@@ -166,21 +127,31 @@
         }
     </style>
     <script>
-        function calculateAge(birthYear, deathYear) {
-            return deathYear - birthYear;
-        }
+        let currentIndex = 2;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const ageElement = document.getElementById('age');
-            const birthYear = 1933;
-            const deathYear = 2024;
-            ageElement.textContent = calculateAge(birthYear, deathYear);
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = document.querySelectorAll(".gallery-content img");
+            const updateGallery = () => {
+                images.forEach((img, index) => {
+                    img.classList.remove("current");
+                    if (index === currentIndex) {
+                        img.classList.add("current");
+                    }
+                });
+            };
+
+            document.querySelector(".gallery-prev").addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateGallery();
+            });
+
+            document.querySelector(".gallery-next").addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateGallery();
+            });
+
+            updateGallery();
         });
-
-        function likeComment(button) {
-            const counter = button.nextElementSibling;
-            counter.textContent = parseInt(counter.textContent) + 1;
-        }
     </script>
 </head>
 <body>
@@ -190,16 +161,15 @@
     <div class="container">
         <img class="header-image" src="ST1 (16).jpeg" alt="Header Image">
         <div class="personal-details">
-            <h1>Shmuel Tsivoni</h1>
-             <p>2024</p><p> - 1933</p>
-           
+            <h1>שמואל ציבעוני</h1>
+            <p>1933 - 2024</p>
+            
             <p>Age: <span id="age"></span></p>
         </div>
         <div class="links">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/vCTZ_AING4o" frameborder="0" allowfullscreen></iframe>
             <div>
                 <a class="link" href="https://drive.google.com/file/d/1X8dCCOtu6wDsjV5iy1K3CWQlvTYsoCmo/view" target="_blank">הרמת כוסית וויסקי לזכרו</a>
-                <!--<a class="link" href="https://example.com/more-info" target="_blank">Additional Tribute</a>-->
             </div>
         </div>
         <div class="galleries">
@@ -211,6 +181,10 @@
                     <img src="ST1 (17).jpeg" alt="Memorial Image 3">
                     <img src="ST1 (2).jpeg" alt="Memorial Image 4">
                     <img src="ST1 (18).jpeg" alt="Memorial Image 5">
+                </div>
+                <div class="gallery-navigation">
+                    <button class="gallery-prev">&#9664;</button>
+                    <button class="gallery-next">&#9654;</button>
                 </div>
             </div>
         </div>
@@ -237,7 +211,7 @@
         </div>-->
         <div class="map-frame">
             <h2>Grave Location</h2>
-            <p>חלקה: 12 | שורה: 4 | ישוב: זכרון יעקב | מדינה: ישראל</p>
+            <p>חלקה: 12 | שורה: 4 | ישוב: אמונים | מדינה: ישראל</p>
             <p>Coordinates: 32.5704, 34.9535</p>
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.9149228258543!2d34.95070281538915!3d32.570400380099264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d3bfa5a5e4a29%3A0xf5d1d2d2b2d2d2d2!2sZikhron%20Ya'akov!5e0!3m2!1sen!2sil!4v1234567890" 
@@ -247,8 +221,9 @@
         </div>
     </div>
     <footer>
-        
-        &copy; 2025  <a class="link" href="https://www.talkats.com" target="_blank">Soulink Memorial Services</a> All rights reserved.
+        &copy; 2025 All rights reserved.
+        <a class="link" href="https://www.talkats.com" target="_blank">Soulink Memorial Services</a>  
+     
     </footer>
 </body>
 </html>
