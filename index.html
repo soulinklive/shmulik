@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="heb" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,37 +65,14 @@
             margin-bottom: 10px;
         }
         .gallery-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
         .gallery-content img {
-            flex-shrink: 0;
-            border-radius: 4px;
-            margin: 0 10px;
-            transition: transform 0.3s;
-        }
-        .gallery-content img.current {
-            transform: scale(1.5);
-            border: 3px solid #4169E1;
-        }
-        .gallery-navigation {
-            position: absolute;
-            top: 50%;
             width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
-        .gallery-navigation button {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 50%;
+            height: auto;
+            border-radius: 4px;
         }
         footer {
             text-align: center;
@@ -127,30 +104,15 @@
         }
     </style>
     <script>
-        let currentIndex = 2;
+        function calculateAge(birthYear, deathYear) {
+            return deathYear - birthYear;
+        }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const images = document.querySelectorAll(".gallery-content img");
-            const updateGallery = () => {
-                images.forEach((img, index) => {
-                    img.classList.remove("current");
-                    if (index === currentIndex) {
-                        img.classList.add("current");
-                    }
-                });
-            };
-
-            document.querySelector(".gallery-prev").addEventListener("click", () => {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                updateGallery();
-            });
-
-            document.querySelector(".gallery-next").addEventListener("click", () => {
-                currentIndex = (currentIndex + 1) % images.length;
-                updateGallery();
-            });
-
-            updateGallery();
+        document.addEventListener('DOMContentLoaded', () => {
+            const ageElement = document.getElementById('age');
+            const birthYear = 1932;
+            const deathYear = 2024;
+            ageElement.textContent = calculateAge(birthYear, deathYear);
         });
     </script>
 </head>
@@ -161,30 +123,27 @@
     <div class="container">
         <img class="header-image" src="ST1 (16).jpeg" alt="Header Image">
         <div class="personal-details">
+            <h2>לזכרו של</h2>
             <h1>שמואל ציבעוני</h1>
-            <p>1933 - 2024</p>
-            
+            <p>1932 - 2024</p>
+          
             <p>Age: <span id="age"></span></p>
         </div>
         <div class="links">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/vCTZ_AING4o" frameborder="0" allowfullscreen></iframe>
             <div>
-                <a class="link" href="https://drive.google.com/file/d/1X8dCCOtu6wDsjV5iy1K3CWQlvTYsoCmo/view" target="_blank">הרמת כוסית וויסקי לזכרו</a>
+              <h3>  <a class="link" href="https://drive.google.com/file/d/1X8dCCOtu6wDsjV5iy1K3CWQlvTYsoCmo/view" target="_blank">הרמת כוסית וויסקי לזכרו</a> </h3>
             </div>
         </div>
         <div class="galleries">
             <div class="gallery">
-                <h2>Image Gallery</h2>
+                <h2>גלריית תמונות</h2>
                 <div class="gallery-content">
                     <img src="ST1 (24).jpeg" alt="Memorial Image 1">
                     <img src="ST1 (14).jpeg" alt="Memorial Image 2">
                     <img src="ST1 (17).jpeg" alt="Memorial Image 3">
                     <img src="ST1 (2).jpeg" alt="Memorial Image 4">
                     <img src="ST1 (18).jpeg" alt="Memorial Image 5">
-                </div>
-                <div class="gallery-navigation">
-                    <button class="gallery-prev">&#9664;</button>
-                    <button class="gallery-next">&#9654;</button>
                 </div>
             </div>
         </div>
@@ -221,9 +180,7 @@
         </div>
     </div>
     <footer>
-        &copy; 2025 All rights reserved.
-        <a class="link" href="https://www.talkats.com" target="_blank">Soulink Memorial Services</a>  
-     
+        &copy; 2025 <a class="link" href="https://www.talkats.com" target="_blank">Soulink Memorial Services</a>. All rights reserved.
     </footer>
 </body>
 </html>
