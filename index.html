@@ -57,6 +57,7 @@
         }
         .gallery {
             margin-bottom: 30px;
+            display: none; /* Temporarily hide the video gallery */
         }
         .gallery h2 {
             font-size: 24px;
@@ -73,6 +74,15 @@
             height: auto;
             border-radius: 4px;
         }
+        .grave-location {
+            margin-top: 30px;
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            border-radius: 8px;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -88,36 +98,37 @@
     <div class="container">
         <img class="header-image" src="ST1 (16).jpeg" alt="Header Image">
         <div class="personal-details">
-            <h1>Shmuel Tsivoni</h1>
-            <p>Year of Birth: 1933</p>
-            <p>Year of Death: 2024</p>
-            <p>Age: 91</p>
+            <h1>שמואל ציבעוני</h1>
+            <p>1933</p>
+            <p> - 2024</p>
+            <p>Age: <span id="age"></span></p>
         </div>
         <div class="links">
-            <a class="link" href="https://www.youtube.com/watch?v=vCTZ_AING4o" target="_blank">יום הולדת 90 לסבתא שולה וסבא שמוליק</a>
-            <a class="link" href="https://drive.google.com/file/d/1X8dCCOtu6wDsjV5iy1K3CWQlvTYsoCmo/view" target="_blank">הרמת כוסית וויסקי לזכרו</a>
+            <div>
+                <h2>YouTube Tribute</h2>
+                <iframe 
+                    src="https://www.youtube.com/embed/vCTZ_AING4o" 
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
-        <div class="galleries">
-            <div class="gallery">
-                <h2>Video Gallery</h2>
-                <div class="gallery-content">
-                    <video controls src="video1.mp4"></video>
-                    <video controls src="video2.mp4"></video>
-                </div>
-            </div>
-            <div class="gallery">
-                <h2>Image Gallery</h2>
-                <div class="gallery-content">
-                    <img src="ST1 (24).jpeg" alt="Memorial Image 1">
-                    <img src="ST1 (14).jpeg" alt="Memorial Image 2">
-                    <img src="ST1 (17).jpeg" alt="Memorial Image 3">
-                    <img src="ST1 (2).jpeg" alt="Memorial Image 3">
-                </div>
-            </div>
+        <div class="grave-location">
+            <h2>Grave Location</h2>
+            <p>Section: A, Row: 5, Plot: 12</p>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096185!2d144.96305791531667!3d-37.81669797975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce840!2sMelbourne%20VIC!5e0!3m2!1sen!2sau!4v1672536454693!5m2!1sen!2sau"
+                loading="lazy">
+            </iframe>
         </div>
     </div>
     <footer>
         &copy; 2025 Soulink Memorial Services. All rights reserved.
     </footer>
+    <script>
+        // Calculate age dynamically
+        const yearOfBirth = 1933;
+        const yearOfDeath = 2024;
+        document.getElementById('age').textContent = yearOfDeath - yearOfBirth;
+    </script>
 </body>
 </html>
