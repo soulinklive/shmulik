@@ -65,14 +65,43 @@
             margin-bottom: 10px;
         }
         .gallery-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            display: flex;
+            overflow-x: auto;
             gap: 10px;
+            padding: 10px 0;
         }
         .gallery-content img {
-            width: 100%;
-            height: auto;
+            flex-shrink: 0;
             border-radius: 4px;
+            transition: transform 0.3s;
+        }
+        .gallery-content img:nth-child(3) {
+            transform: scale(1.5);
+        }
+        .gallery-content img:not(:nth-child(3)) {
+            transform: scale(0.8);
+        }
+        .comment-form {
+            margin-top: 20px;
+        }
+        .comment-form textarea {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .comment-form input[type="file"] {
+            margin-bottom: 10px;
+        }
+        .comment-form button {
+            padding: 10px 20px;
+            background-color: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
         .comments-preview {
             display: grid;
@@ -181,24 +210,25 @@
                     <img src="ST1 (14).jpeg" alt="Memorial Image 2">
                     <img src="ST1 (17).jpeg" alt="Memorial Image 3">
                     <img src="ST1 (2).jpeg" alt="Memorial Image 4">
+                    <img src="ST1 (18).jpeg" alt="Memorial Image 5">
                 </div>
             </div>
         </div>
+        <div class="comment-form">
+            <h2>Add Your Comment</h2>
+            <form>
+                <textarea placeholder="Write a short message..."></textarea>
+                <input type="file" accept="image/*">
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
         <div class="comments-preview">
             <div class="comment">
-                <p><strong>John Doe:</strong> This is a beautiful memorial page.</p>
-                <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
-            </div>
-            <div class="comment">
-                <p><strong>Jane Smith:</strong> A wonderful tribute to a great person.</p>
+                <p><strong>Emily White:</strong> Truly touching and heartfelt.</p>
                 <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
             </div>
             <div class="comment">
                 <p><strong>Alex Brown:</strong> May their memory be a blessing.</p>
-                <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
-            </div>
-            <div class="comment">
-                <p><strong>Emily White:</strong> Truly touching and heartfelt.</p>
                 <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
             </div>
         </div>
