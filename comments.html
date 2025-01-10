@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Comments</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #2C3E50;
+        }
+        header {
+            background-color: #4169E1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .comments {
+            margin-top: 20px;
+        }
+        .comment {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .comment p {
+            margin: 0 0 10px 0;
+        }
+        .like-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+            .comment p {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        function likeComment(button) {
+            const counter = button.nextElementSibling;
+            counter.textContent = parseInt(counter.textContent) + 1;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Comments for Shmuel Tsivoni</h1>
+    </header>
+    <div class="container">
+        <img class="header-image" src="ST1 (16).jpeg" alt="Header Image">
+        <div class="comments">
+            <div class="comment">
+                <p><strong>John Doe:</strong> This is a beautiful memorial page.</p>
+                <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
+            </div>
+            <div class="comment">
+                <p><strong>Jane Smith:</strong> A wonderful tribute to a great person.</p>
+                <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
+            </div>
+            <div class="comment">
+                <p><strong>Alex Brown:</strong> May their memory be a blessing.</p>
+                <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
+            </div>
+            <div class="comment">
+                <p><strong>Emily White:</strong> Truly touching and heartfelt.</p>
+                <div class="like-button" onclick="likeComment(this)">❤️ <span>0</span></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Soulink Memorial Services. All rights reserved.
+    </footer>
+</body>
+</html>
