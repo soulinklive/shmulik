@@ -147,14 +147,52 @@
                 </div>
             </div>
         </div>
-        <div class="google-photos-album">
-    <h2>Photo Album</h2>
-    <iframe 
-        src="https://photos.app.goo.gl/m35rrKsmf5QJm2UE7"
-        style="border: 0; width: 100%; height: 500px;" 
-        allowfullscreen>
-    </iframe>
-</div>
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Google Photos Album</title>
+  <script src="https://cdn.jsdelivr.net/npm/publicalbum@latest/embed-ui.min.js" async></script>
+  <style>
+    #gallery-container {
+      width: 100%;
+      height: 480px;
+    }
+  </style>
+</head>
+<body>
+  <h1>אלבום</h1>
+  <div id="gallery-container" class="pa-gallery-player-widget" style="display:none;"
+       data-link="https://photos.app.goo.gl/m35rrKsmf5QJm2UE7"
+       data-title="מתגעגעים לסבא שמוליק"
+       data-description="Automatically refreshed album">
+  </div>
+
+  <script>
+    // Function to refresh the gallery
+    function refreshGallery() {
+      const gallery = document.getElementById('gallery-container');
+      const dataLink = gallery.getAttribute('data-link'); // Preserve the album link
+
+      // Clear the gallery to trigger a refresh
+      gallery.innerHTML = '';
+      setTimeout(() => {
+        gallery.setAttribute('data-link', dataLink); // Reapply the album link
+        gallery.style.display = 'none'; // Reset display property
+        gallery.classList.add('pa-gallery-player-widget'); // Reapply the widget class
+      }, 100); // Timeout ensures smooth re-render
+    }
+
+    // Set an interval to refresh the gallery every 5 minutes (300000 ms)
+    setInterval(refreshGallery, 300000);
+
+    // Initial render to display the album on page load
+    document.addEventListener("DOMContentLoaded", refreshGallery);
+  </script>
+</body>
+</html>
+
 
         <!--<div class="comment-form">
             <h2>Add Your Comment</h2>
