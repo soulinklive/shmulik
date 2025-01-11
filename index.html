@@ -147,52 +147,93 @@
                 </div>
             </div>
         </div>
-       <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Google Photos Album</title>
-  <script src="https://cdn.jsdelivr.net/npm/publicalbum@latest/embed-ui.min.js" async></script>
-  <style>
-    #gallery-container {
-      width: 100%;
-      height: 480px;
-    }
-  </style>
-</head>
-<body>
-  <h1>אלבום</h1>
-  <div id="gallery-container" class="pa-gallery-player-widget" style="display:none;"
-       data-link="https://photos.app.goo.gl/m35rrKsmf5QJm2UE7"
-       data-title="מתגעגעים לסבא שמוליק"
-       data-description="Automatically refreshed album">
-  </div>
+     
+ <!-- Google Photos Album Integration -->
+        <script src="https://cdn.jsdelivr.net/npm/publicalbum/dist/publicalbum.min.js"></script>
+        <style>
+            #album-title {
+                text-align: center;
+                font-family: Arial, sans-serif;
+                margin: 20px 0;
+                font-size: 24px;
+                color: #333;
+            }
 
-  <script>
-    // Function to refresh the gallery
-    function refreshGallery() {
-      const gallery = document.getElementById('gallery-container');
-      const dataLink = gallery.getAttribute('data-link'); // Preserve the album link
+            #google-photos-album {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 10px;
+                padding: 20px;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
 
-      // Clear the gallery to trigger a refresh
-      gallery.innerHTML = '';
-      setTimeout(() => {
-        gallery.setAttribute('data-link', dataLink); // Reapply the album link
-        gallery.style.display = 'none'; // Reset display property
-        gallery.classList.add('pa-gallery-player-widget'); // Reapply the widget class
-      }, 100); // Timeout ensures smooth re-render
-    }
+            #google-photos-album img {
+                width: 100%;
+                border-radius: 5px;
+                transition: transform 0.3s ease;
+            }
 
-    // Set an interval to refresh the gallery every 5 minutes (300000 ms)
-    setInterval(refreshGallery, 300000);
+            #google-photos-album img:hover {
+                transform: scale(1.05);
+            }
+        </style>
+        <h2 id="album-title">Loading Album...</h2>
+        <div id="google-photos-album"></div>
 
-    // Initial render to display the album on page load
-    document.addEventListener("DOMContentLoaded", refreshGallery);
-  </script>
-</body>
-</html>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // URL of your public Google Photos album
+                const albumUrl = "https://photos.app.goo.gl/m35rrKsmf5QJm2UE7"; // Replace with your public album URL
 
+                // Function to load and display the Google Photos album
+                function loadAlbum() {
+                    PublicAlbum.load(albumUrl, {
+                        // The container where the photos will be displayed
+                        container: document.getElementById("google-photos-album"),
+
+                        // Style options for the gallery
+                        style: {
+                            gallery: {
+                                columnCount: 3, // Number of columns in the gallery
+                                gap: "10px",    // Gap between images
+                            },
+                            photo: {
+                                borderRadius: "5px", // Rounded corners for photos
+                            },
+                        },
+
+                        // Additional options for the gallery
+                        options: {
+                            showTitles: false,       // Do not show individual photo titles
+                            showDescriptions: false, // Do not show individual photo descriptions
+                            lightbox: true,         // Enable lightbox feature for full-size images
+                        },
+                    })
+                    .then((albumData) => {
+                        // Set the album title dynamically
+                        const albumTitle = albumData.title || "My Google Album";
+                        document.getElementById("album-title").innerText = albumTitle;
+
+                        console.log("Album loaded successfully!", albumData);
+                    })
+                    .catch((error) => {
+                        console.error("Failed to load album:", error);
+                        document.getElementById("album-title").innerText = "Failed to Load Album";
+                    });
+                }
+
+                // Load the album for the first time
+                loadAlbum();
+
+                // Auto-refresh the album every 5 minutes to display newly added photos
+                setInterval(() => {
+                    console.log("Refreshing album...");
+                    loadAlbum();
+                }, 5 * 60 * 1000); // Refresh interval: 5 minutes (in milliseconds)
+            });
+        </script>
+        <!-- End of Google Photos Album Integration -->
 
         <!--<div class="comment-form">
             <h2>Add Your Comment</h2>
